@@ -1,5 +1,5 @@
 <p align="center">
-<img src="/assets/logo.png" alt="RaspberryScripts" width="120">
+<img src="/assets/logo.jpeg" alt="RaspberryScripts" width="400">
 </p>
 
 <h1 align="center">Raspberry Pi Scripts Hub</h1>
