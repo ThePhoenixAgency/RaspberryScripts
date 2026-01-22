@@ -1,78 +1,34 @@
-**docs/maintenance-rpi.en.md**
+# 🧰 Raspberry Pi Supervision Menu (GUI + CLI) – EN
 
-```markdown
-# 🧰 Raspberry Pi Maintenance Menu (GUI + CLI) – EN
+This script provides a full **supervision** menu for Raspberry Pi:
 
-This script provides a full maintenance menu for Raspberry Pi:
-
-- Automatic updates twice a day (`apt update && apt upgrade -y`)
-- GUI menu (Zenity) and CLI menu (1–9)
+- Automatic system updates via cron (`apt update && apt upgrade -y`)
+- Automatic cleanup of temporary files (`/tmp`, `/var/tmp`)
+- Graphical menu (Zenity) and CLI menu (multiple options)
 - Root cron management (list, add, delete, replace)
-- Viewing the update log (`/var/log/update-system.log`)
+- Viewing update logs (most recent entries first)
+- Automatic system + admin scripts backups
+  - Detects the best disk (NVMe or SD card)
+  - Backup rotation (keeps 3 backups)
+  - Integrity check (SHA256 hash + size)
+  - Restore by date (Windows “restore point” style)
+- Centralized logs with 7‑day retention
+
+The main system script installed is: `/usr/local/bin/update-system.sh`.
 
 ---
 
 ## Related scripts
 
-- FR installer: `../scripts/install-maintenance-rpi.fr.sh`
-- EN installer: `../scripts/install-maintenance-rpi.en.sh`
-
-The installed system script is: `/usr/local/bin/update-system.sh`.
+- FR installer: [`../scripts/install-supervision.fr.sh`](../scripts/install-supervision-rpi.fr.sh)  
+- EN installer: [`../scripts/install-supervision.en.sh`](../scripts/install-supervision-rpi.en.sh)
 
 ---
 
 ## Installation
 
-1. Copy `../scripts/install-maintenance-rpi.en.sh` to the Raspberry Pi.
-2. Make the script executable:
+1. Copy `../scripts/install-supervision.en.sh` to your Raspberry Pi.
+2. Make the installer executable:
 
-```bash
-chmod +x install-maintenance-rpi.en.sh
-
-    Run the installer script:
-
-bash
-./install-maintenance-rpi.en.sh
-
-Usage
-GUI / CLI menu
-
-From the desktop:
-
-    Double-click the "Maintenance (GUI+CLI)" icon
-
-    or run:
-
-bash
-/usr/local/bin/update-system.sh
-
-The script first tries the GUI, then falls back to the CLI if needed.
-Main features
-
-    System update
-
-    Reboot / shutdown
-
-    Show root crons
-
-    Add / delete / replace root cron lines
-
-    Show update log
-
-Auto‑update cron
-
-After installation, the root crontab contains:
-
-text
-# Automatic system update twice a day at 06:00 and 18:00
-0 6,18 * * * /usr/local/bin/update-system.sh --auto
-
-Show cron:
-
-bash
-sudo crontab -l
-
-Show log:
-
-bash
-sudo tail -n 50 /var/log/update-system.log
+   ```bash
+   chmod +x install-supervision.en.sh
