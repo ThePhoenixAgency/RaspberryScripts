@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+Disallow: /scripts/
+Disallow: /.git/
+
+Sitemap: https://ThePhoenixAgency.github.io/RaspberryScripts/sitemap.xml
+
+# Optimisation pour les moteurs de recherche
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 0
