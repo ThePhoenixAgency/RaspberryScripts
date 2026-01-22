@@ -5,7 +5,7 @@
 <h1 align="center">Raspberry Pi Scripts Hub</h1>
 
 <p align="center">
-  <a href="https://thephoenixagency.github.io/RaspberryScripts/"><strong>🌐 View Documentation Website</strong></a>
+  <a href="https://ThePhoenixAgency.github.io/RaspberryScripts/"><strong>🌐 View Documentation Website</strong></a>
 </p>
 
 <p align="center">
@@ -19,31 +19,68 @@
 
 ## 🇫🇷 Français
 
-Bienvenue dans ton hub de scripts Raspberry Pi.  
-Chaque script est documenté dans un fichier `.md` dédié, avec son mode d'emploi et les liens vers les versions **FR** et **EN** du script Bash.
+Bienvenue dans **Raspberry Pi Scripts Hub**, ton centre de scripts d’administration pour Raspberry Pi.
 
-> **📁 Tous les scripts Bash sont dans le dossier `scripts/`.**  
-> **📝 Toute la doc détaillée des scripts est dans le dossier `docs/`.**  
-> **🌐 Consulte aussi le site de documentation : [index.html](https://thephoenixagency.github.io/RaspberryScripts/)**
+Chaque script a :
+
+- Un fichier Bash dans `scripts/`
+- Une documentation dédiée dans `docs/` (FR + EN)
+- Une intégration prévue avec le site de documentation GitHub Pages :  
+  👉 [`index.html`](https://ThePhoenixAgency.github.io/RaspberryScripts/)
+
+> **📁 Scripts Bash :** dossier `scripts/`  
+> **📝 Documentation détaillée :** dossier `docs/`  
+> **🌐 Site de doc :** `ThePhoenixAgency.github.io/RaspberryScripts`
 
 ### Scripts disponibles
 
-- 🧰 **Menu de Supervision Raspberry Pi (GUI + CLI)**
-  - 🇫🇷 Documentation FR : [`docs/supervision.fr.md`](docs/supervision.fr.md)
+- 🧰 **Menu de Supervision Raspberry Pi (GUI + CLI)**  
+  Supervision complète du Raspberry Pi :
+  - Mises à jour automatiques (cron)
+  - Nettoyage des fichiers temporaires
+  - Menu CLI + GUI (zenity)
+  - Gestion des crons root (afficher / ajouter / supprimer / remplacer)
+  - Sauvegardes automatiques avec :
+    - Détection du meilleur disque (NVMe ou SD)
+    - Rotation des sauvegardes (3 sauvegardes max)
+    - Vérification d’intégrité (hash + taille)
+    - Restauration par date (type “point de restauration”)
+  - Logs centralisés avec rétention 7 jours
+
+  - 🇫🇷 Documentation FR : [`docs/supervision.fr.md`](docs/supervision.fr.md)  
   - 🇬🇧 Documentation EN : [`docs/supervision.en.md`](docs/supervision.en.md)
+
 ---
 
 ## 🇬🇧 English
 
-Welcome to your Raspberry Pi scripts hub.  
-Each script has its own `.md` documentation file, with usage and links to the **FR** and **EN** Bash versions.
+Welcome to **Raspberry Pi Scripts Hub**, your admin scripts hub for Raspberry Pi.
 
-> **📁 All Bash scripts live in the `scripts/` folder.**  
-> **📝 All detailed docs for each script live in the `docs/` folder.**  
-> **🌐 Also check out the documentation website: [index.html](https://thephoenixagency.github.io/RaspberryScripts/)**
+Each script ships with:
+
+- A Bash script in `scripts/`
+- A dedicated `.md` documentation file in `docs/` (FR + EN)
+- A static documentation website hosted on GitHub Pages:  
+  👉 [`index.html`](https://ThePhoenixAgency.github.io/RaspberryScripts/)
+
+> **📁 Bash scripts live in:** `scripts/`  
+> **📝 Detailed docs live in:** `docs/`  
+> **🌐 Documentation website:** `ThePhoenixAgency.github.io/RaspberryScripts`
 
 ### Available scripts
 
-- 🧰 **Raspberry Pi Supervision Menu (GUI + CLI)**
-  - 🇫🇷 FR docs: [`docs/supervision.fr.md`](docs/supervision.fr.md)
+- 🧰 **Raspberry Pi Supervision Menu (GUI + CLI)**  
+  Full supervision of your Raspberry Pi:
+  - Automatic updates via cron
+  - Temporary files cleanup
+  - CLI + GUI menu (zenity)
+  - Root cron management (list / add / delete / replace)
+  - Automated backups with:
+    - Best disk detection (NVMe or SD)
+    - Backup rotation (keep 3 backups)
+    - Integrity check (hash + size)
+    - Restore by date (Windows “restore point” style)
+  - Centralized logs with 7‑day retention
+
+  - 🇫🇷 FR docs: [`docs/supervision.fr.md`](docs/supervision.fr.md)  
   - 🇬🇧 EN docs: [`docs/supervision.en.md`](docs/supervision.en.md)
