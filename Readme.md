@@ -82,5 +82,5 @@ Each script ships with:
     - Restore by date (Windows “restore point” style)
   - Centralized logs with 7‑day retention
 
-  - 🇫🇷 FR docs: [`docs/supervision.fr.md`](docs/supervision.fr.md)  
-  - 🇬🇧 EN docs: [`docs/supervision.en.md`](docs/supervision.en.md)
+  - 🇫🇷 FR docs: [`docs/Supervision.fr.md`](docs/Supervision.fr.md)  
+  - 🇬🇧 EN docs: [`docs/Supervision.en.md`](docs/Supervision.en.md)
