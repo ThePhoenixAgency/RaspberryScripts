@@ -12,24 +12,27 @@
     <meta name="robots" content="noindex, follow">
     <link rel="canonical" href="https://ThePhoenixAgency.github.io/RaspberryScripts/404.html">
     
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ThePhoenixAgency.github.io/RaspberryScripts/404.html">
+    <meta property="og:title" content="404 - Page Non Trouvée | RaspberryScripts">
+    <meta property="og:description" content="Page non trouvée. Retournez à la documentation RaspberryScripts.">
+    <meta property="og:image" content="https://ThePhoenixAgency.github.io/RaspberryScripts/assets/logo.jpeg">
+    
     <!-- Security Headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()">
     
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="assets/logo.jpeg">
+    <link rel="apple-touch-icon" href="assets/logo.jpeg">
     
-    <script>
-        'use strict';
-        // Redirection immédiate vers index.html seulement si on n'est pas déjà en erreur
-        const urlParams = new URLSearchParams(window.location.search);
-        if (!urlParams.has('error')) {
-            window.location.replace('index.html');
-        }
-    </script>
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" href="sitemap.xml">
     
     <style>
         * {
@@ -39,58 +42,216 @@
         }
         
         :root {
-            --primary-color: #2563eb;
-            --secondary-color: #1e40af;
-            --text-color: #1f2937;
-            --text-light: #6b7280;
-            --bg-color: #ffffff;
-            --bg-light: #f9fafb;
-            --border-color: #e5e7eb;
-            --error-color: #ef4444;
+            --bg: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #151515;
+            --text: #e5e5e5;
+            --text-muted: #a1a1a1;
+            --text-dim: #6b6b6b;
+            --accent: #00d4ff;
+            --accent-hover: #00b8e6;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.12);
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            background: var(--bg-light);
-            color: var(--text-color);
-            line-height: 1.7;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
             font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             min-height: 100vh;
-            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
         }
         
-        .error-container {
-            text-align: center;
-            max-width: 600px;
-            background: var(--bg-color);
+        /* Pattern électronique et Raspberry Pi en arrière-plan très léger */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            z-index: 0;
+            background-image: 
+                /* Circuits électroniques */
+                radial-gradient(circle at 20% 30%, var(--accent) 1px, transparent 1px),
+                radial-gradient(circle at 80% 70%, var(--accent) 1px, transparent 1px),
+                radial-gradient(circle at 50% 50%, var(--accent) 1px, transparent 1px),
+                /* Lignes de circuit */
+                linear-gradient(90deg, transparent 0%, var(--accent) 1px, transparent 2%),
+                linear-gradient(0deg, transparent 0%, var(--accent) 1px, transparent 2%),
+                /* Formes Raspberry Pi stylisées */
+                url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.1'%3E%3Crect x='80' y='60' width='40' height='80' rx='4' fill='%2300d4ff'/%3E%3Ccircle cx='90' cy='80' r='3' fill='%2300d4ff'/%3E%3Ccircle cx='110' cy='80' r='3' fill='%2300d4ff'/%3E%3Ccircle cx='90' cy='100' r='3' fill='%2300d4ff'/%3E%3Ccircle cx='110' cy='100' r='3' fill='%2300d4ff'/%3E%3Crect x='75' y='55' width='50' height='5' rx='2' fill='%2300d4ff'/%3E%3Crect x='75' y='140' width='50' height='5' rx='2' fill='%2300d4ff'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 
+                50px 50px,
+                50px 50px,
+                50px 50px,
+                100px 100px,
+                100px 100px,
+                200px 200px;
+            background-position: 
+                0 0,
+                25px 25px,
+                50px 50px,
+                0 0,
+                0 0,
+                0 0;
+            pointer-events: none;
+            animation: patternMove 60s linear infinite;
+        }
+        
+        @keyframes patternMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Header minimaliste */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1.5rem 0;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            object-fit: cover;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--text);
+            margin: 0;
+        }
+        
+        .logo-text p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0.25rem 0 0 0;
+        }
+        
+        .icon {
+            width: 18px;
+            height: 18px;
+            display: inline-block;
+        }
+        
+        .icon svg {
+            width: 100%;
+            height: 100%;
+            fill: currentColor;
+        }
+        
+        /* Boutons langage style devpad */
+        .language-selector {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .lang-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 0.625rem 1.25rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .lang-btn:hover {
+            background: var(--bg-secondary);
+            border-color: var(--border-hover);
+            color: var(--text);
+        }
+        
+        .lang-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #000;
+            font-weight: 600;
+        }
+        
+        .lang-btn.active:hover {
+            background: var(--accent-hover);
+        }
+        
+        /* Content card style devpad */
+        main {
+            padding: 4rem 0;
+        }
+        
+        .content {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 3rem;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-            border: 1px solid var(--border-color);
+            position: relative;
+            z-index: 1;
+            text-align: center;
         }
         
         .error-code {
             font-size: 6rem;
-            font-weight: 700;
-            color: var(--error-color);
-            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -2px;
+            color: var(--accent);
             margin-bottom: 1rem;
+            line-height: 1;
         }
         
         .error-title {
-            font-size: 2rem;
-            font-weight: 600;
-            color: var(--text-color);
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            color: var(--text);
             margin-bottom: 1rem;
         }
         
         .error-message {
             font-size: 1.125rem;
-            color: var(--text-light);
-            margin-bottom: 2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
         }
         
         .error-actions {
@@ -105,71 +266,372 @@
             align-items: center;
             gap: 0.5rem;
             padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            border-radius: 8px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.875rem;
             transition: all 0.2s;
             border: none;
             cursor: pointer;
-            font-size: 1rem;
         }
         
         .btn-primary {
-            background: var(--primary-color);
-            color: white;
+            background: var(--accent);
+            color: #000;
         }
         
         .btn-primary:hover {
-            background: var(--secondary-color);
+            background: var(--accent-hover);
         }
         
         .btn-secondary {
-            background: var(--bg-light);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
         }
         
         .btn-secondary:hover {
-            background: var(--border-color);
+            background: var(--bg-secondary);
+            border-color: var(--border-hover);
+            color: var(--text);
         }
         
-        .icon {
-            width: 20px;
-            height: 20px;
-            display: inline-block;
-            vertical-align: middle;
+        /* Footer minimaliste */
+        footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            margin-top: 5rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
         }
         
-        .icon svg {
-            width: 100%;
-            height: 100%;
-            fill: currentColor;
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+        
+        .footer-link:hover {
+            color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
+        }
+        
+        .footer-copyright {
+            color: var(--text-dim);
+            font-size: 0.875rem;
+        }
+        
+        /* Cookie Banner style devpad */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            padding: 1.5rem;
+            z-index: 2000;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-out;
+        }
+        
+        .cookie-banner.show {
+            transform: translateY(0);
+        }
+        
+        .cookie-banner-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .cookie-banner-text {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .cookie-banner-text p {
+            margin: 0;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+        
+        .cookie-banner-text a {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+        
+        .cookie-banner-actions {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        .cookie-btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            border: none;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        
+        .cookie-btn-accept {
+            background: var(--accent);
+            color: #000;
+        }
+        
+        .cookie-btn-accept:hover {
+            background: var(--accent-hover);
+        }
+        
+        .cookie-btn-reject {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+        
+        .cookie-btn-reject:hover {
+            background: var(--bg-secondary);
+            border-color: var(--border-hover);
+            color: var(--text);
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .error-code {
+                font-size: 4rem;
+            }
+            
+            .error-title {
+                font-size: 2rem;
+            }
+            
+            .cookie-banner-content {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .cookie-banner-actions {
+                width: 100%;
+            }
+            
+            .cookie-btn {
+                flex: 1;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="error-container">
-        <div class="error-code">404</div>
-        <h1 class="error-title">Page non trouvée</h1>
-        <p class="error-message">La page que vous recherchez n'existe pas ou une erreur s'est produite lors du chargement de la documentation.</p>
-        <div class="error-actions">
-            <a href="index.html" class="btn btn-primary">
-                <span class="icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
-                    </svg>
-                </span>
-                Retour à l'accueil
-            </a>
-            <a href="sitemap.xml" class="btn btn-secondary">
-                <span class="icon">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
-                    </svg>
-                </span>
-                Voir le sitemap
-            </a>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="assets/logo.jpeg" alt="RaspberryScripts Logo" class="logo" width="48" height="48" loading="eager">
+                    <div class="logo-text">
+                        <h1>RaspberryScripts</h1>
+                        <p>Scripts Raspberry Pi - Documentation Technique</p>
+                    </div>
+                </div>
+                <nav class="language-selector" aria-label="Sélection de langue">
+                    <a href="index.html" class="lang-btn active">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="8" height="8" x="0" y="0" fill="#002654"/>
+                                <rect width="8" height="8" x="8" y="0" fill="#ffffff"/>
+                                <rect width="8" height="8" x="16" y="0" fill="#002654"/>
+                                <rect width="8" height="8" x="0" y="8" fill="#002654"/>
+                                <rect width="8" height="8" x="8" y="8" fill="#ffffff"/>
+                                <rect width="8" height="8" x="16" y="8" fill="#002654"/>
+                                <rect width="8" height="8" x="0" y="16" fill="#002654"/>
+                                <rect width="8" height="8" x="8" y="16" fill="#ffffff"/>
+                                <rect width="8" height="8" x="16" y="16" fill="#002654"/>
+                            </svg>
+                        </span>
+                        Accueil
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <article class="content" id="content" role="main">
+                <div class="error-code">404</div>
+                <h1 class="error-title">Page non trouvée</h1>
+                <p class="error-message">La page que vous recherchez n'existe pas ou une erreur s'est produite lors du chargement de la documentation.</p>
+                <div class="error-actions">
+                    <a href="index.html" class="btn btn-primary">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                            </svg>
+                        </span>
+                        Retour à l'accueil
+                    </a>
+                    <a href="sitemap.xml" class="btn btn-secondary">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                            </svg>
+                        </span>
+                        Voir le sitemap
+                    </a>
+                </div>
+            </article>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <nav class="footer-links" aria-label="Liens du footer">
+                    <a href="https://thephoenixagency.github.io/RaspberryScripts" class="footer-link" rel="noopener noreferrer" target="_blank">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </span>
+                        GitHub
+                    </a>
+                    <a href="sitemap.xml" class="footer-link">
+                        <span class="icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"/>
+                            </svg>
+                        </span>
+                        Sitemap
+                    </a>
+                </nav>
+                <p class="footer-copyright">&copy; 2026 ThePhoenixAgency - RaspberryScripts. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Cookie Banner RGPD -->
+    <div id="cookieBanner" class="cookie-banner" role="dialog" aria-labelledby="cookieBannerTitle" aria-live="polite">
+        <div class="cookie-banner-content">
+            <div class="cookie-banner-text">
+                <p id="cookieBannerTitle"><strong>Gestion des cookies</strong> - Ce site utilise des cookies techniques nécessaires au fonctionnement du site. Aucun cookie de suivi ou publicitaire n'est utilisé. En continuant à naviguer, vous acceptez l'utilisation de ces cookies essentiels.</p>
+            </div>
+            <div class="cookie-banner-actions">
+                <button class="cookie-btn cookie-btn-accept" id="cookieAccept" aria-label="Accepter les cookies">Accepter</button>
+                <button class="cookie-btn cookie-btn-reject" id="cookieReject" aria-label="Refuser les cookies">Refuser</button>
+            </div>
         </div>
     </div>
+    
+    <script>
+        'use strict';
+        
+        // Cookie Management RGPD (identique à index.html)
+        const CookieManager = {
+            COOKIE_NAME: 'cookie_consent',
+            COOKIE_EXPIRY: 365,
+            
+            getConsent: function() {
+                const cookies = document.cookie.split(';');
+                for (let cookie of cookies) {
+                    const [name, value] = cookie.trim().split('=');
+                    if (name === this.COOKIE_NAME) {
+                        return value;
+                    }
+                }
+                return null;
+            },
+            
+            setConsent: function(value) {
+                const date = new Date();
+                date.setTime(date.getTime() + (this.COOKIE_EXPIRY * 24 * 60 * 60 * 1000));
+                const expires = 'expires=' + date.toUTCString();
+                document.cookie = this.COOKIE_NAME + '=' + value + ';' + expires + ';path=/;SameSite=Strict;Secure';
+            },
+            
+            showBanner: function() {
+                const banner = document.getElementById('cookieBanner');
+                if (banner) {
+                    banner.classList.add('show');
+                }
+            },
+            
+            hideBanner: function() {
+                const banner = document.getElementById('cookieBanner');
+                if (banner) {
+                    banner.classList.remove('show');
+                }
+            },
+            
+            init: function() {
+                const consent = this.getConsent();
+                if (!consent) {
+                    setTimeout(() => this.showBanner(), 500);
+                }
+                
+                const acceptBtn = document.getElementById('cookieAccept');
+                const rejectBtn = document.getElementById('cookieReject');
+                
+                if (acceptBtn) {
+                    acceptBtn.addEventListener('click', () => {
+                        this.setConsent('accepted');
+                        this.hideBanner();
+                    });
+                }
+                
+                if (rejectBtn) {
+                    rejectBtn.addEventListener('click', () => {
+                        this.setConsent('rejected');
+                        this.hideBanner();
+                    });
+                }
+            }
+        };
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            CookieManager.init();
+        });
+    </script>
 </body>
 </html>

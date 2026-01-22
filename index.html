@@ -56,7 +56,7 @@
     </script>
     
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://ThePhoenixAgency.github.io; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://thephoenixagency.github.io https://raw.githubusercontent.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
@@ -78,54 +78,100 @@
         }
         
         :root {
-            --macos-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --macos-surface: rgba(255, 255, 255, 0.85);
-            --macos-surface-hover: rgba(255, 255, 255, 0.95);
-            --macos-border: rgba(255, 255, 255, 0.2);
-            --macos-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            --macos-shadow-hover: 0 12px 48px rgba(0, 0, 0, 0.15);
-            --text-primary: #1d1d1f;
-            --text-secondary: #6e6e73;
-            --accent-blue: #0071e3;
-            --accent-blue-hover: #0077ed;
+            --bg: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-card: #151515;
+            --text: #e5e5e5;
+            --text-muted: #a1a1a1;
+            --text-dim: #6b6b6b;
+            --accent: #00d4ff;
+            --accent-hover: #00b8e6;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.12);
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
-            background: var(--macos-bg);
-            background-attachment: fixed;
-            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
             line-height: 1.6;
-            font-size: 17px;
+            font-size: 16px;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Pattern électronique et Raspberry Pi en arrière-plan très léger */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.03;
+            z-index: 0;
+            background-image: 
+                /* Circuits électroniques */
+                radial-gradient(circle at 20% 30%, var(--accent) 1px, transparent 1px),
+                radial-gradient(circle at 80% 70%, var(--accent) 1px, transparent 1px),
+                radial-gradient(circle at 50% 50%, var(--accent) 1px, transparent 1px),
+                /* Lignes de circuit */
+                linear-gradient(90deg, transparent 0%, var(--accent) 1px, transparent 2%),
+                linear-gradient(0deg, transparent 0%, var(--accent) 1px, transparent 2%),
+                /* Formes Raspberry Pi stylisées */
+                url("data:image/svg+xml,%3Csvg width='200' height='200' xmlns='http://www.w3.org/2000/svg'%3E%3Cg opacity='0.1'%3E%3Crect x='80' y='60' width='40' height='80' rx='4' fill='%2300d4ff'/%3E%3Ccircle cx='90' cy='80' r='3' fill='%2300d4ff'/%3E%3Ccircle cx='110' cy='80' r='3' fill='%2300d4ff'/%3E%3Ccircle cx='90' cy='100' r='3' fill='%2300d4ff'/%3E%3Ccircle cx='110' cy='100' r='3' fill='%2300d4ff'/%3E%3Crect x='75' y='55' width='50' height='5' rx='2' fill='%2300d4ff'/%3E%3Crect x='75' y='140' width='50' height='5' rx='2' fill='%2300d4ff'/%3E%3C/g%3E%3C/svg%3E");
+            background-size: 
+                50px 50px,
+                50px 50px,
+                50px 50px,
+                100px 100px,
+                100px 100px,
+                200px 200px;
+            background-position: 
+                0 0,
+                25px 25px,
+                50px 50px,
+                0 0,
+                0 0,
+                0 0;
+            pointer-events: none;
+            animation: patternMove 60s linear infinite;
+        }
+        
+        @keyframes patternMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
         }
         
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
+            position: relative;
+            z-index: 1;
         }
         
-        /* macOS-style Header */
+        /* Header minimaliste */
         header {
             position: sticky;
             top: 0;
             z-index: 1000;
             padding: 1.5rem 0;
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            background: rgba(255, 255, 255, 0.72);
-            border-bottom: 1px solid var(--macos-border);
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--border);
         }
         
         .header-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            gap: 2rem;
             flex-wrap: wrap;
-            gap: 1.5rem;
         }
         
         .logo-section {
@@ -135,38 +181,30 @@
         }
         
         .logo {
-            width: 56px;
-            height: 56px;
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
             object-fit: cover;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .logo:hover {
-            transform: scale(1.05);
         }
         
         .logo-text h1 {
-            font-size: 1.75rem;
-            font-weight: 600;
+            font-size: 1.5rem;
+            font-weight: 700;
             letter-spacing: -0.5px;
-            color: var(--text-primary);
+            color: var(--text);
             margin: 0;
         }
         
         .logo-text p {
-            font-size: 0.9375rem;
-            color: var(--text-secondary);
+            font-size: 0.875rem;
+            color: var(--text-muted);
             margin: 0.25rem 0 0 0;
-            font-weight: 400;
         }
         
         .icon {
             width: 18px;
             height: 18px;
             display: inline-block;
-            vertical-align: middle;
         }
         
         .icon svg {
@@ -175,95 +213,90 @@
             fill: currentColor;
         }
         
-        /* macOS-style Buttons */
+        /* Boutons langage style devpad */
         .language-selector {
             display: flex;
             gap: 0.5rem;
-            background: rgba(0, 0, 0, 0.05);
-            padding: 0.25rem;
-            border-radius: 10px;
-            backdrop-filter: blur(10px);
         }
         
         .lang-btn {
-            background: transparent;
-            border: none;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
             padding: 0.625rem 1.25rem;
             border-radius: 8px;
             cursor: pointer;
             font-size: 0.875rem;
             font-weight: 500;
-            color: var(--text-primary);
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--text-muted);
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            position: relative;
         }
         
         .lang-btn:hover {
-            background: rgba(0, 0, 0, 0.08);
+            background: var(--bg-secondary);
+            border-color: var(--border-hover);
+            color: var(--text);
         }
         
         .lang-btn.active {
-            background: var(--macos-surface);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            color: var(--accent-blue);
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #000;
+            font-weight: 600;
         }
         
-        /* macOS-style Content Card */
+        .lang-btn.active:hover {
+            background: var(--accent-hover);
+        }
+        
+        /* Content card style devpad */
         main {
-            padding: 3rem 0;
+            padding: 4rem 0;
         }
         
         .content {
-            background: var(--macos-surface);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-radius: 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             padding: 3rem;
-            box-shadow: var(--macos-shadow);
-            border: 1px solid var(--macos-border);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .content:hover {
-            box-shadow: var(--macos-shadow-hover);
-            background: var(--macos-surface-hover);
+            position: relative;
+            z-index: 1;
         }
         
         .content h1 {
             font-size: 2.5rem;
-            font-weight: 700;
+            font-weight: 800;
             letter-spacing: -1px;
-            color: var(--text-primary);
+            color: var(--text);
             margin-bottom: 1.5rem;
-            line-height: 1.1;
+            line-height: 1.2;
         }
         
         .content h2 {
             font-size: 1.875rem;
-            font-weight: 600;
+            font-weight: 700;
             letter-spacing: -0.5px;
-            color: var(--accent-blue);
-            margin-top: 2.5rem;
+            color: var(--accent);
+            margin-top: 3rem;
             margin-bottom: 1.25rem;
             padding-bottom: 0.75rem;
-            border-bottom: 2px solid rgba(0, 113, 227, 0.1);
+            border-bottom: 1px solid var(--border);
         }
         
         .content h3 {
             font-size: 1.5rem;
             font-weight: 600;
             letter-spacing: -0.3px;
-            color: var(--text-primary);
+            color: var(--text);
             margin-top: 2rem;
             margin-bottom: 1rem;
         }
         
         .content p {
             margin-bottom: 1.25rem;
-            color: var(--text-primary);
+            color: var(--text-muted);
             line-height: 1.7;
         }
         
@@ -274,96 +307,93 @@
         
         .content li {
             margin-bottom: 0.75rem;
-            color: var(--text-primary);
+            color: var(--text-muted);
             line-height: 1.7;
         }
         
         .content pre {
-            background: rgba(0, 0, 0, 0.85);
-            color: #f5f5f7;
-            padding: 1.75rem;
+            background: #000;
+            color: var(--text);
+            padding: 1.5rem;
             border-radius: 12px;
             overflow-x: auto;
             margin: 2rem 0;
             font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
             font-size: 0.875rem;
             line-height: 1.6;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
         }
         
         .content code {
-            background: rgba(0, 0, 0, 0.08);
+            background: rgba(0, 212, 255, 0.1);
             padding: 0.25rem 0.5rem;
             border-radius: 6px;
             font-family: 'SF Mono', 'Monaco', 'Menlo', monospace;
             font-size: 0.875rem;
-            color: #d63384;
-            font-weight: 500;
+            color: var(--accent);
+            border: 1px solid rgba(0, 212, 255, 0.2);
         }
         
         .content pre code {
             background: transparent;
             padding: 0;
             color: inherit;
+            border: none;
         }
         
         .content a {
-            color: var(--accent-blue);
+            color: var(--accent);
             text-decoration: none;
             border-bottom: 1px solid transparent;
             transition: all 0.2s;
         }
         
         .content a:hover {
-            border-bottom-color: var(--accent-blue);
-            color: var(--accent-blue-hover);
+            border-bottom-color: var(--accent);
+            color: var(--accent-hover);
         }
         
         .content blockquote {
-            border-left: 4px solid var(--accent-blue);
+            border-left: 3px solid var(--accent);
             padding-left: 1.5rem;
             margin: 2rem 0;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             font-style: italic;
-            background: rgba(0, 113, 227, 0.05);
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
         }
         
         .content table {
             width: 100%;
             border-collapse: collapse;
             margin: 2rem 0;
-            border-radius: 12px;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
         }
         
         .content table th,
         .content table td {
             padding: 1rem;
-            border: 1px solid rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border);
             text-align: left;
         }
         
         .content table th {
-            background: rgba(0, 0, 0, 0.05);
+            background: var(--bg-secondary);
             font-weight: 600;
-            color: var(--text-primary);
+            color: var(--text);
         }
         
         .loading {
             text-align: center;
             padding: 4rem;
-            color: var(--text-secondary);
+            color: var(--text-muted);
         }
         
         .loading-spinner {
             display: inline-block;
             width: 48px;
             height: 48px;
-            border: 3px solid rgba(0, 113, 227, 0.2);
-            border-top-color: var(--accent-blue);
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
@@ -372,15 +402,15 @@
             to { transform: rotate(360deg); }
         }
         
-        /* macOS-style Footer */
+        /* Footer minimaliste */
         footer {
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-top: 1px solid var(--macos-border);
-            padding: 2.5rem 0;
-            margin-top: 4rem;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 3rem 0;
+            margin-top: 5rem;
             text-align: center;
+            position: relative;
+            z-index: 1;
         }
         
         .footer-content {
@@ -398,9 +428,9 @@
         }
         
         .footer-link {
-            color: var(--text-secondary);
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 0.9375rem;
+            font-size: 0.875rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -410,30 +440,27 @@
         }
         
         .footer-link:hover {
-            color: var(--accent-blue);
-            background: rgba(0, 113, 227, 0.1);
+            color: var(--accent);
+            background: rgba(0, 212, 255, 0.1);
         }
         
         .footer-copyright {
-            color: var(--text-secondary);
+            color: var(--text-dim);
             font-size: 0.875rem;
         }
         
-        /* Cookie Banner macOS-style */
+        /* Cookie Banner style devpad */
         .cookie-banner {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: saturate(180%) blur(20px);
-            -webkit-backdrop-filter: saturate(180%) blur(20px);
-            border-top: 1px solid var(--macos-border);
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
             padding: 1.5rem;
-            box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.1);
             z-index: 2000;
             transform: translateY(100%);
-            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s ease-out;
         }
         
         .cookie-banner.show {
@@ -457,13 +484,13 @@
         
         .cookie-banner-text p {
             margin: 0;
-            font-size: 0.9375rem;
-            color: var(--text-primary);
+            font-size: 0.875rem;
+            color: var(--text-muted);
             line-height: 1.6;
         }
         
         .cookie-banner-text a {
-            color: var(--accent-blue);
+            color: var(--accent);
             text-decoration: underline;
         }
         
@@ -475,39 +502,39 @@
         
         .cookie-btn {
             padding: 0.75rem 1.5rem;
-            border-radius: 10px;
-            font-size: 0.9375rem;
-            font-weight: 500;
+            border-radius: 8px;
+            font-size: 0.875rem;
+            font-weight: 600;
             cursor: pointer;
             border: none;
-            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.2s;
             white-space: nowrap;
         }
         
         .cookie-btn-accept {
-            background: var(--accent-blue);
-            color: white;
+            background: var(--accent);
+            color: #000;
         }
         
         .cookie-btn-accept:hover {
-            background: var(--accent-blue-hover);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 113, 227, 0.3);
+            background: var(--accent-hover);
         }
         
         .cookie-btn-reject {
-            background: rgba(0, 0, 0, 0.05);
-            color: var(--text-primary);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid var(--border);
         }
         
         .cookie-btn-reject:hover {
-            background: rgba(0, 0, 0, 0.1);
+            background: var(--bg-secondary);
+            border-color: var(--border-hover);
+            color: var(--text);
         }
         
         @media (max-width: 768px) {
             .container {
-                padding: 0 1rem;
+                padding: 0 1.5rem;
             }
             
             .header-content {
@@ -547,7 +574,7 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo-section">
-                    <img src="assets/logo.jpeg" alt="RaspberryScripts Logo" class="logo" width="56" height="56" loading="eager">
+                    <img src="assets/logo.jpeg" alt="RaspberryScripts Logo" class="logo" width="48" height="48" loading="eager">
                     <div class="logo-text">
                         <h1>RaspberryScripts</h1>
                         <p>Scripts Raspberry Pi - Documentation Technique</p>
@@ -608,7 +635,7 @@
         <div class="container">
             <div class="footer-content">
                 <nav class="footer-links" aria-label="Liens du footer">
-                    <a href="https://ThePhoenixAgency.github.io/RaspberryScripts" class="footer-link" rel="noopener noreferrer" target="_blank">
+                    <a href="https://thephoenixagency.github.io/RaspberryScripts" class="footer-link" rel="noopener noreferrer" target="_blank">
                         <span class="icon">
                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -646,7 +673,7 @@
     <script>
         'use strict';
         
-        // Markdown Parser intégré
+        // Markdown Parser intégré amélioré
         function parseMarkdown(markdown) {
             if (!markdown) return '';
             
@@ -658,15 +685,15 @@
             });
             
             // Headers
+            html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
             html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
             html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
             html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
             
-            // Bold
+            // Bold and Italic
+            html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
             html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             html = html.replace(/__(.*?)__/g, '<strong>$1</strong>');
-            
-            // Italic
             html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
             html = html.replace(/_(.*?)_/g, '<em>$1</em>');
             
@@ -676,23 +703,34 @@
             // Links
             html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" rel="noopener noreferrer">$1</a>');
             
-            // Lists
-            const listItems = html.match(/^[\*\-\+] .+$/gm);
-            if (listItems) {
-                html = html.replace(/^[\*\-\+] (.+)$/gm, '<li>$1</li>');
-                html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
-            }
+            // Images
+            html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1" loading="lazy">');
+            
+            // Horizontal rules
+            html = html.replace(/^---$/gim, '<hr>');
+            html = html.replace(/^\*\*\*$/gim, '<hr>');
+            
+            // Lists - unordered
+            html = html.replace(/^[\*\-\+] (.+)$/gm, '<li>$1</li>');
+            // Wrap consecutive list items
+            html = html.replace(/(<li>.*<\/li>\n?)+/g, function(match) {
+                return '<ul>' + match + '</ul>';
+            });
+            
+            // Lists - ordered
+            html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
             
             // Blockquotes
-            html = html.replace(/^> (.*$)/gim, '<blockquote>$1</blockquote>');
+            html = html.replace(/^> (.+)$/gm, '<blockquote>$1</blockquote>');
             
-            // Paragraphs
-            html = html.split('\n\n').map(para => {
-                if (para.trim() && !para.match(/^<[h|u|o|l|b|p]/)) {
-                    return '<p>' + para.trim() + '</p>';
-                }
-                return para;
-            }).join('');
+            // Paragraphs - split by double newlines
+            const paragraphs = html.split(/\n\n+/);
+            html = paragraphs.map(para => {
+                para = para.trim();
+                if (!para) return '';
+                if (para.match(/^<[h|u|o|l|b|p|d|t|s]/)) return para;
+                return '<p>' + para + '</p>';
+            }).join('\n\n');
             
             return html;
         }
@@ -705,9 +743,11 @@
         
         // Configuration
         const CONFIG = {
-            baseUrl: 'https://ThePhoenixAgency.github.io/RaspberryScripts',
-            docsPath: '/docs/supervision',
-            errorPage: '404.html?error=true'
+            baseUrl: 'https://thephoenixagency.github.io/RaspberryScripts',
+            docsPath: '/docs/Supervision',
+            readmePath: '/Readme.md',
+            errorPage: '404.html?error=true',
+            useRawGitHub: false
         };
         
         let currentLang = 'fr';
@@ -774,8 +814,6 @@
             }
         };
         
-        // Note: secureFetch removed - using fetch directly in loadDoc for better error handling
-        
         // Update language buttons
         function updateLanguageButtons(lang) {
             const btnFr = document.getElementById('btn-fr');
@@ -801,59 +839,65 @@
             updateLanguageButtons(lang);
             
             try {
-                const url = `${CONFIG.baseUrl}${CONFIG.docsPath}.${lang}.md`;
-                console.log('Loading from:', url);
+                // Try multiple sources: docs first, then README as fallback
+                let urls = [
+                    `${CONFIG.baseUrl}${CONFIG.docsPath}.${lang}.md`,
+                    `https://raw.githubusercontent.com/ThePhoenixAgency/RaspberryScripts/main/docs/Supervision.${lang}.md`,
+                    `${CONFIG.baseUrl}${CONFIG.readmePath}`,
+                    `https://raw.githubusercontent.com/ThePhoenixAgency/RaspberryScripts/main/Readme.md`
+                ];
                 
-                const response = await fetch(url, {
-                    method: 'GET',
-                    mode: 'cors',
-                    credentials: 'omit',
-                    redirect: 'follow',
-                    referrerPolicy: 'strict-origin-when-cross-origin'
-                });
+                let markdown = null;
+                let lastError = null;
                 
-                // Only redirect on actual HTTP errors (404, 500, etc.)
-                if (!response.ok) {
-                    console.error(`HTTP Error: ${response.status} ${response.statusText}`);
-                    // Only redirect for client/server errors, not for redirects
-                    if (response.status >= 400) {
-                        window.location.href = CONFIG.errorPage;
-                        return;
+                // Try each URL until one works
+                for (let url of urls) {
+                    try {
+                        console.log('Trying:', url);
+                        const response = await fetch(url, {
+                            method: 'GET',
+                            mode: 'cors',
+                            credentials: 'omit',
+                            redirect: 'follow',
+                            referrerPolicy: 'strict-origin-when-cross-origin'
+                        });
+                        
+                        if (response.ok) {
+                            markdown = await response.text();
+                            if (markdown && markdown.trim().length > 0) {
+                                console.log('Successfully loaded from:', url);
+                                break;
+                            }
+                        } else {
+                            lastError = `HTTP ${response.status}: ${response.statusText}`;
+                        }
+                    } catch (err) {
+                        lastError = err.message;
+                        continue;
                     }
                 }
                 
-                const markdown = await response.text();
-                console.log('Markdown loaded, length:', markdown.length);
-                
-                // Validate content - only redirect if truly empty
+                // If all URLs failed, show error
                 if (!markdown || markdown.trim().length === 0) {
-                    console.error('Empty content received');
-                    window.location.href = CONFIG.errorPage;
+                    console.error('All URLs failed. Last error:', lastError);
+                    contentDiv.innerHTML = '<div class="loading"><p style="color: var(--accent);">Documentation non trouvée. Redirection...</p></div>';
+                    setTimeout(() => {
+                        window.location.href = CONFIG.errorPage;
+                    }, 2000);
                     return;
                 }
                 
-                // Parse markdown
+                // Parse and display markdown
                 const html = parseMarkdown(markdown);
-                console.log('Markdown parsed, HTML length:', html.length);
-                
-                // Only redirect if parsing completely failed AND we have content
-                // If markdown exists but parsing failed, show raw markdown instead
-                if (!html || html.trim().length === 0) {
-                    if (markdown.trim().length > 0) {
-                        // Show raw markdown if parsing failed but content exists
-                        console.warn('Parsing failed, showing raw markdown');
-                        contentDiv.innerHTML = '<pre>' + escapeHtml(markdown) + '</pre>';
-                        return;
-                    } else {
-                        console.error('Both markdown and HTML are empty');
-                        window.location.href = CONFIG.errorPage;
-                        return;
-                    }
+                if (html && html.trim().length > 0) {
+                    contentDiv.innerHTML = html;
+                    console.log('Content loaded and displayed successfully');
+                    return;
+                } else {
+                    // Show raw markdown if parsing failed
+                    contentDiv.innerHTML = '<pre>' + escapeHtml(markdown) + '</pre>';
+                    return;
                 }
-                
-                // Success - set content
-                contentDiv.innerHTML = html;
-                console.log('Content loaded successfully');
                 
             } catch (error) {
                 console.error('Error loading documentation:', error);
@@ -864,7 +908,7 @@
                     // For other errors, show error message instead of redirecting
                     const contentDiv = document.getElementById('content');
                     if (contentDiv) {
-                        contentDiv.innerHTML = '<div class="loading"><p style="color: var(--error-color);">Erreur lors du chargement. Veuillez réessayer.</p></div>';
+                        contentDiv.innerHTML = '<div class="loading"><p style="color: var(--accent);">Erreur lors du chargement. Veuillez réessayer.</p></div>';
                     }
                 }
             }
