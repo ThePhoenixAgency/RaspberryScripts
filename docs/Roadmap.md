@@ -240,7 +240,6 @@ UX du menu :
 - Ajouter un double-confirm avant restauration (question explicite + nom de la sauvegarde).
 
 ---
-
 ## ÉTAT ACTUEL
 
 FAIT :
