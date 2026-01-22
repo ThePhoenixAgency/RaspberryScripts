@@ -1,0 +1,447 @@
+# ============================================
+# Protection des dossiers et fichiers sensibles
+# ============================================
+
+# Dossiers critiques à protéger
+/.git/
+/.github/
+/.vscode/
+/.idea/
+/node_modules/
+/vendor/
+/packages/
+/build/
+/dist/
+/out/
+/.next/
+/.nuxt/
+/.output/
+/.cache/
+/tmp/
+/temp/
+/logs/
+/backups/
+/backup/
+/archives/
+/old/
+/legacy/
+/private/
+/secrets/
+/.secrets/
+/config/local/
+/.env.local/
+/credentials/
+/.credentials/
+
+# Dossiers de scripts sensibles
+/scripts/private/
+/scripts/local/
+/scripts/secrets/
+/scripts/*.secret.*
+/scripts/*.local.*
+
+# Dossiers de documentation privée
+/docs/private/
+/docs/internal/
+/docs/confidential/
+/docs/*.draft.*
+/docs/*.private.*
+
+# Dossiers d'assets sensibles
+/assets/private/
+/assets/internal/
+/assets/confidential/
+/assets/*.secret.*
+/assets/*.local.*
+
+# ============================================
+# macOS
+# ============================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+**/.DS_Store
+
+# ============================================
+# Windows
+# ============================================
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msm
+*.msp
+*.lnk
+**/Thumbs.db
+**/Desktop.ini
+
+# ============================================
+# Linux
+# ============================================
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+**/*~
+
+# ============================================
+# IDE / Editors
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+*.code-workspace
+*.sublime-*
+.vscode-test/
+.history/
+*.code-workspace
+
+# ============================================
+# Fichiers temporaires
+# ============================================
+*.tmp
+*.temp
+*.log
+*.cache
+*.bak
+*.backup
+*~
+.cache/
+tmp/
+temp/
+*.swp
+*.swo
+*.swn
+*.orig
+*.rej
+*.patch
+*.diff
+*.old
+*.new
+
+# ============================================
+# Node.js (si utilisé)
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log*
+.npm/
+.yarn/
+.pnp.*
+.yarn/cache
+.yarn/unplugged
+.yarn/build-state.yml
+.yarn/install-state.gz
+
+# ============================================
+# Build / Dist / Output
+# ============================================
+dist/
+build/
+out/
+.next/
+.nuxt/
+.output/
+.vercel/
+.netlify/
+.cache/
+.parcel-cache/
+.turbo/
+.rollup.cache/
+
+# ============================================
+# Variables d'environnement et secrets
+# ============================================
+.env
+.env.local
+.env.*.local
+.env.development
+.env.production
+.env.test
+.env.staging
+*.env
+*.env.*
+.envrc
+.secrets
+secrets/
+.secrets/
+*.secret
+*.secrets
+*.key
+*.pem
+*.p12
+*.pfx
+*.cert
+*.crt
+*.cer
+*.der
+*.jks
+*.keystore
+credentials/
+.credentials/
+*.credentials
+config.local.*
+*.config.local.*
+
+# ============================================
+# Fichiers de sécurité
+# ============================================
+*.pem
+*.key
+*.cert
+*.crt
+*.cer
+*.der
+*.jks
+*.keystore
+*.p12
+*.pfx
+id_rsa
+id_rsa.pub
+id_dsa
+id_dsa.pub
+id_ecdsa
+id_ecdsa.pub
+id_ed25519
+id_ed25519.pub
+known_hosts
+authorized_keys
+*.gpg
+*.pgp
+
+# ============================================
+# Archives et compressions
+# ============================================
+*.zip
+*.tar
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.rar
+*.7z
+*.gz
+*.bz2
+*.xz
+*.lz
+*.lzma
+*.z
+*.Z
+*.tgz
+*.tbz2
+*.txz
+
+# ============================================
+# Fichiers de base de données
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+*.db-shm
+*.db-wal
+*.mdb
+*.accdb
+*.fdb
+*.sql
+*.dump
+*.sql.gz
+
+# ============================================
+# Fichiers de logs
+# ============================================
+*.log
+logs/
+*.log.*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+*.log.*
+*.log.*.gz
+
+# ============================================
+# Fichiers de test et coverage
+# ============================================
+coverage/
+.nyc_output/
+*.lcov
+.coverage/
+htmlcov/
+.pytest_cache/
+.tox/
+.hypothesis/
+*.cover
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+*.egg-info
+
+# ============================================
+# Fichiers système générés
+# ============================================
+*.swp
+*.swo
+*~
+.directory
+.Trash-*
+.nfs*
+*.orig
+*.rej
+*.patch
+*.diff
+
+# ============================================
+# Fichiers spécifiques au projet
+# ============================================
+Cache/
+*.temp
+*.tmp
+*.old
+*.new
+*.bak
+*.backup
+*.save
+*.sav
+
+# ============================================
+# Fichiers de configuration locale
+# ============================================
+config.local.*
+*.local.*
+local.*
+.local/
+local/
+*.local
+.local.*
+
+# ============================================
+# Fichiers de déploiement
+# ============================================
+.vercel/
+.netlify/
+.firebase/
+.serverless/
+.fusebox/
+.dynamodb/
+.tern-port
+.vscode-test/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# ============================================
+# Fichiers de documentation générés
+# ============================================
+docs/_build/
+docs/.doctrees/
+site/
+_site/
+.jekyll-cache/
+.jekyll-metadata
+
+# ============================================
+# Fichiers de sauvegarde
+# ============================================
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+*.sav
+backup/
+backups/
+*.backup.*
+*.bak.*
+
+# ============================================
+# Protection supplémentaire - Patterns génériques
+# ============================================
+# Tous les fichiers commençant par un point sauf ceux explicitement trackés
+.*
+!.gitignore
+!.gitattributes
+!.github/
+!.vscode/
+!.editorconfig
+!.prettierrc
+!.eslintrc
+!.eslintrc.*
+!.prettierrc.*
+!.babelrc
+!.babelrc.*
+!.npmrc
+!.yarnrc
+!.nvmrc
+!.node-version
+
+# Fichiers avec extensions sensibles
+*.secret
+*.private
+*.confidential
+*.internal
+*.local
+*.dev
+*.test
+*.staging
+*.prod
+
+# Dossiers avec noms sensibles
+**/private/
+**/internal/
+**/confidential/
+**/secrets/
+**/secret/
+**/local/
+**/dev/
+**/test/
+**/staging/
+**/prod/
+**/production/
+**/backup/
+**/backups/
+**/old/
+**/legacy/
+**/temp/
+**/tmp/
+**/cache/
+**/logs/
