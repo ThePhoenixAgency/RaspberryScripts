@@ -1,0 +1,5 @@
+## .Gitignore ##
+
+.DS_Store
+Cache
+*temp
