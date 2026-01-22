@@ -774,27 +774,7 @@
             }
         };
         
-        // Secure fetch with error handling
-        async function secureFetch(url) {
-            try {
-                const response = await fetch(url, {
-                    method: 'GET',
-                    mode: 'cors',
-                    credentials: 'omit',
-                    redirect: 'follow',
-                    referrerPolicy: 'strict-origin-when-cross-origin'
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-                }
-                
-                return response;
-            } catch (error) {
-                console.error('Fetch error:', error);
-                throw error;
-            }
-        }
+        // Note: secureFetch removed - using fetch directly in loadDoc for better error handling
         
         // Update language buttons
         function updateLanguageButtons(lang) {
@@ -811,7 +791,6 @@
             
             if (!contentDiv) {
                 console.error('Content div not found');
-                window.location.href = CONFIG.errorPage;
                 return;
             }
             
@@ -823,54 +802,99 @@
             
             try {
                 const url = `${CONFIG.baseUrl}${CONFIG.docsPath}.${lang}.md`;
-                const response = await secureFetch(url);
+                console.log('Loading from:', url);
                 
-                // Check response status
+                const response = await fetch(url, {
+                    method: 'GET',
+                    mode: 'cors',
+                    credentials: 'omit',
+                    redirect: 'follow',
+                    referrerPolicy: 'strict-origin-when-cross-origin'
+                });
+                
+                // Only redirect on actual HTTP errors (404, 500, etc.)
                 if (!response.ok) {
                     console.error(`HTTP Error: ${response.status} ${response.statusText}`);
-                    window.location.href = CONFIG.errorPage;
-                    return;
+                    // Only redirect for client/server errors, not for redirects
+                    if (response.status >= 400) {
+                        window.location.href = CONFIG.errorPage;
+                        return;
+                    }
                 }
                 
                 const markdown = await response.text();
+                console.log('Markdown loaded, length:', markdown.length);
                 
-                // Validate content
+                // Validate content - only redirect if truly empty
                 if (!markdown || markdown.trim().length === 0) {
-                    console.error('Empty or invalid content');
+                    console.error('Empty content received');
                     window.location.href = CONFIG.errorPage;
                     return;
                 }
                 
                 // Parse markdown
                 const html = parseMarkdown(markdown);
+                console.log('Markdown parsed, HTML length:', html.length);
                 
+                // Only redirect if parsing completely failed AND we have content
+                // If markdown exists but parsing failed, show raw markdown instead
                 if (!html || html.trim().length === 0) {
-                    console.error('Failed to parse markdown');
-                    window.location.href = CONFIG.errorPage;
-                    return;
+                    if (markdown.trim().length > 0) {
+                        // Show raw markdown if parsing failed but content exists
+                        console.warn('Parsing failed, showing raw markdown');
+                        contentDiv.innerHTML = '<pre>' + escapeHtml(markdown) + '</pre>';
+                        return;
+                    } else {
+                        console.error('Both markdown and HTML are empty');
+                        window.location.href = CONFIG.errorPage;
+                        return;
+                    }
                 }
                 
-                // Set content
+                // Success - set content
                 contentDiv.innerHTML = html;
+                console.log('Content loaded successfully');
                 
             } catch (error) {
                 console.error('Error loading documentation:', error);
-                // Redirect to 404 on any error
-                window.location.href = CONFIG.errorPage;
+                // Only redirect on network errors or critical failures
+                if (error.message && (error.message.includes('Failed to fetch') || error.message.includes('NetworkError') || error.message.includes('network'))) {
+                    window.location.href = CONFIG.errorPage;
+                } else {
+                    // For other errors, show error message instead of redirecting
+                    const contentDiv = document.getElementById('content');
+                    if (contentDiv) {
+                        contentDiv.innerHTML = '<div class="loading"><p style="color: var(--error-color);">Erreur lors du chargement. Veuillez réessayer.</p></div>';
+                    }
+                }
             }
         }
         
-        // Global error handlers
+        // Global error handlers - only for critical errors
         window.addEventListener('error', function(e) {
             console.error('Global error:', e.error);
-            if (e.error && e.error.message && (e.error.message.includes('fetch') || e.error.message.includes('network') || e.error.message.includes('Failed'))) {
-                window.location.href = CONFIG.errorPage;
+            // Only redirect for critical network/fetch errors, not for all errors
+            if (e.error && e.error.message && 
+                (e.error.message.includes('Failed to fetch') || 
+                 e.error.message.includes('NetworkError') ||
+                 e.error.message.includes('Load failed'))) {
+                // Only redirect if we're actually trying to load content
+                const contentDiv = document.getElementById('content');
+                if (contentDiv && contentDiv.innerHTML.includes('Chargement')) {
+                    window.location.href = CONFIG.errorPage;
+                }
             }
         }, { passive: true });
         
         window.addEventListener('unhandledrejection', function(e) {
             console.error('Unhandled rejection:', e.reason);
-            window.location.href = CONFIG.errorPage;
+            // Only redirect for fetch/network related rejections
+            const reason = e.reason;
+            if (reason && typeof reason === 'object' && reason.message) {
+                if (reason.message.includes('fetch') || reason.message.includes('network') || reason.message.includes('Failed to fetch')) {
+                    window.location.href = CONFIG.errorPage;
+                }
+            }
         }, { passive: true });
         
         // Initialize on load
