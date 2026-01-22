@@ -47,8 +47,8 @@ Chaque script a :
     - Restauration par date (type “point de restauration”)
   - Logs centralisés avec rétention 7 jours
 
-  - 🇫🇷 Documentation FR : [`docs/supervision.fr.md`](docs/supervision.fr.md)  
-  - 🇬🇧 Documentation EN : [`docs/supervision.en.md`](docs/supervision.en.md)
+  - 🇫🇷 Documentation FR : [`docs/Supervision.fr.md`](docs/Supervision.fr.md)  
+  - 🇬🇧 Documentation EN : [`docs/Supervision.en.md`](docs/Supervision.en.md)
 
 ---
 
