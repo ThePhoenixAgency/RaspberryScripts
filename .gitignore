@@ -445,3 +445,4 @@ backups/
 **/tmp/
 **/cache/
 **/logs/
+.DS_Store
